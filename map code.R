@@ -24,6 +24,7 @@ library(tigris)
 
 
 # setwd to wherever you keep this file / want outputs to go 
+setwd("/Users/emmakayleigh/Desktop/ASAP/mcclintock letters")
 ML_geo <- read_csv("ML_geo.csv")
 
 # re-arranging so published dots appear on top of pledged dots and are visible
@@ -54,13 +55,13 @@ ML_map <- ggplot() +
     legend.box.background = element_rect(fill='transparent'))
 
 ML_map
-ggsave("ML_map.png", ML_map, width = 12, height = 10)
+# ggsave("ML_map.png", ML_map, width = 12, height = 10)
 
 # Creating Visits map
 all_usa_visits <- all_usa %>%
   arrange((NAME))
-all_usa_visits$visit <- c(1,2,1,2,1,1,1,2,2,1,1,2,1,1,1,1,1,1,2,2,1,1,1,1,2,1,2,1,
-                          2,1,2,1,1,1,2,1,2,2,1,2,2,2,2,1,1,1,2,1,1,1,1,2)
+all_usa_visits$visit <- c(1,2,1,2,1,1,1,2,2,1,1,2,1,1,1,2,2,1,2,2,1,1,1,1,2,1,2,1,
+                          2,1,2,1,1,1,2,2,2,2,1,2,2,2,2,1,1,1,2,1,1,2,1,2)
 all_usa_visits$visit <- as.character(all_usa_visits$visit)
 map_visits <- ggplot() + 
   geom_sf(data = all_usa_visits, aes(fill = visit)) +
@@ -82,22 +83,4 @@ ML_map_visits <- map_visits +
   scale_color_manual(values = c("#643f7c"), na.value = "#C2C354")
   
 ML_map_visits
-ggsave("ML_map_visits.png", ML_map_visits, width = 12, height = 10)
-
-
-# cool but doesn't have alaska, HI, or PR
-
-
-
-  # trying w scale_color_gradientn - THE plor
-  # ggplot()+
-  #   geom_point(data = endo_herb_AGHY, aes(x = lon, y = lat, color = trate), pch = 20, size=0.8)+
-#   scale_color_gradient(low="darkmagenta", high = "plum1",
-#                         breaks= seq(0,1, by = 0.2),
-#                         limits = c(0,1),
-#                         labels = as.character(seq(0,1,by = 0.2)),
-#                        name=NULL )+
-#   ggtitle("Transmission Rates of Endophyte to Offspring")+
-#   xlab("Longitude")+ylab("Latitude")+
-#   geom_sf(data = usa, fill = "transparent")+
-#   theme_classic()
+# ggsave("ML_map_visits_actual.png", ML_map_visits, width = 12, height = 10)
